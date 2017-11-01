@@ -4,11 +4,15 @@ const todoForm = document.querySelector(".todo__add");
 // An initial list of dummy to-do items
 let items = [
   {
-    title: "Learn CSS Grid",
+    title: "Learn CSS Grid Layout",
     done: true
   },
   {
-    title: "Learn how to use debugger",
+    title: "Feed the cat",
+    done: false
+  },
+  {
+    title: "Learn how to use Firefox Debugger",
     done: false
   }
 ];
@@ -17,15 +21,14 @@ let items = [
 const addTodo = e => {
   e.preventDefault();
   const title = document.querySelector(".todo__input").value;
-  const todoForm = document.querySelector(".todo__add");
   const todo = {
     title,
-    done: false,
+    done: false
   };
 
   items.push(todo);
   saveList();
-  todoForm.reset();
+  document.querySelector(".todo__add").reset();
 };
 
 // A function to create the To-Do list from the items array
@@ -38,11 +41,9 @@ const createList = (list = [], listTarget) => {
         ? "checked"
         : ""} />
           <label for="todo${i}">
+            <img src="./img/check.svg" class="todo__done" data-index="${i}" />
             <div class="todo__text">${item.title}</div>
-            <div class="todo__buttons">
-              <span class="todo__done" data-index="${i}">done</span>
-              <span class="todo__delete" data-index="${i}">delete</span>
-            </div>
+            <span class="todo__delete" data-index="${i}">Delete</span>
           </label>
         </li>
       `
@@ -63,7 +64,7 @@ const toggleDone = e => {
 const removeSingle = e => {
   const el = e.target;
   if (!el.classList.contains("todo__delete")) return;
-  const index = el.dataset.number;
+  const index = el.dataset.index;
   spliceItem(index);
 };
 

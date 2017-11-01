@@ -18,6 +18,7 @@ let items = [
 
 // A function to add a new To-Do item
 const addTodo = e => {
+  debugger;
   e.preventDefault();
   const title = document.querySelector(".todo__input").value;
   const todo = {
